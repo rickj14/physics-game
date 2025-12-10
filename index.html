@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physik-Abenteuer: Wellen & Licht</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+    <header class="top">
+      <div>
+        <h1>Physik-Abenteuer</h1>
+        <p>Einfaches Spiel für 14-Jährige aus Ottakring: Wellen, Schall, Licht & Farben.</p>
+      </div>
+      <div class="scoreboard">
+        <div class="score" id="score">⭐ 0</div>
+        <div class="hearts" id="hearts" aria-live="polite"></div>
+      </div>
+    </header>
+
+    <section class="game-panel" aria-live="polite">
+      <div class="card" id="lesson-card">
+        <h2 id="topic">Los geht's!</h2>
+        <p id="lesson">Drücke auf "Neue Aufgabe" und sammle Sterne. Jede richtige Antwort gibt +1, jede falsche kostet ein Herz.</p>
+        <div class="tags" id="tags"></div>
+      </div>
+
+      <div class="card" id="question-card">
+        <h3 id="question">Bereit?</h3>
+        <div class="answers" id="answers"></div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <button id="new-task">Neue Aufgabe</button>
+      <button id="mix-mode">Wechsel: Quiz / Blitzrunde</button>
+      <div class="mode" id="mode-label">Modus: Quiz (ruhig)</div>
+    </section>
+
+    <section class="mini-story">
+      <h3>Mini-Story</h3>
+      <p id="story">Du bist Reporterin in Ottakring und musst Physik erklären. Rette deine Herzen mit richtigen Antworten!</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
