@@ -79,6 +79,11 @@ main {
   gap: 8px;
 }
 
+.active-drop {
+  outline: 2px dashed var(--accent);
+  background: rgba(38, 208, 206, 0.08);
+}
+
 .draggable {
   padding: 10px;
   background: linear-gradient(135deg, rgba(38, 208, 206, 0.8), rgba(38, 208, 206, 0.5));

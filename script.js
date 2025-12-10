@@ -6,8 +6,9 @@ const feedbackSource = document.getElementById('feedback-source');
 function addDragEvents(el) {
   el.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', e.id);
+    e.dataTransfer.effectAllowed = 'move';
     setTimeout(() => {
-      e.classList.add('dragging');
+      el.classList.add('dragging');
     }, 0);
   });
   el.addEventListener('dragend', () => {
@@ -22,18 +23,30 @@ function prepareDraggables() {
   });
 }
 
-function allowDrop(zone) {
-  zone.addEventListener('dragover', (e) => e.preventDefault());
-  zone.addEventListener('drop', (e) => {
+function attachDropTargets() {
+  const dropTargets = document.querySelectorAll('.dropzone, #source-pool');
+  dropTargets.forEach((zone) => {
+    zone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      zone.classList.add('active-drop');
+    });
+    zone.addEventListener('dragleave', () => zone.classList.remove('active-drop'));
+  });
+
+  document.addEventListener('drop', (e) => {
+    const zone = e.target.closest('.dropzone, #source-pool');
+    if (!zone) return;
     e.preventDefault();
     const id = e.dataTransfer.getData('text/plain');
     const el = document.getElementById(id);
-    zone.appendChild(el);
+    if (el) zone.appendChild(el);
+    zone.classList.remove('active-drop');
   });
 }
 
 prepareDraggables();
-[pool, selfDrop, passiveDrop].forEach(allowDrop);
+attachDropTargets();
 
 document.querySelector('[data-target="source"]').addEventListener('click', () => {
   const checkZone = (zone, expected) =>
