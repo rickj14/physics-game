@@ -26,22 +26,29 @@ function prepareDraggables() {
 function attachDropTargets() {
   const dropTargets = document.querySelectorAll('.dropzone, #source-pool');
   dropTargets.forEach((zone) => {
+    const clearHighlights = () =>
+      dropTargets.forEach((z) => z.classList.remove('active-drop'));
+
     zone.addEventListener('dragover', (e) => {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
       zone.classList.add('active-drop');
     });
-    zone.addEventListener('dragleave', () => zone.classList.remove('active-drop'));
-  });
-
-  document.addEventListener('drop', (e) => {
-    const zone = e.target.closest('.dropzone, #source-pool');
-    if (!zone) return;
-    e.preventDefault();
-    const id = e.dataTransfer.getData('text/plain');
-    const el = document.getElementById(id);
-    if (el) zone.appendChild(el);
-    zone.classList.remove('active-drop');
+    zone.addEventListener('dragenter', (e) => {
+      if (e.target.closest('.draggable')) return;
+      zone.classList.add('active-drop');
+    });
+    zone.addEventListener('dragleave', (e) => {
+      if (e.currentTarget.contains(e.relatedTarget)) return;
+      zone.classList.remove('active-drop');
+    });
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text/plain');
+      const el = document.getElementById(id);
+      if (el) zone.appendChild(el);
+      clearHighlights();
+    });
   });
 }
 
