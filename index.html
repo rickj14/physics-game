@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Die Magie des Lichts – Optik-Abenteuer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Die Magie des Lichts: Dein Abenteuer in der Welt der Optik</h1>
+    <p>Weniger Multiple Choice, mehr Mitmachen! Wähle die Spiele unten und entdecke das Licht mit eigenen Augen.</p>
+  </header>
+
+  <main>
+    <section class="level" id="level1">
+      <div class="level-header">
+        <h2>Level 1 – Lichtquellen ordnen</h2>
+        <p>Ziehe die Begriffe in die richtigen Teams: Selbstsender erzeugen ihr eigenes Licht, Zwischensender reflektieren.</p>
+      </div>
+      <div class="drag-grid">
+        <div class="column" data-type="self">
+          <h3>Selbstsender</h3>
+          <div class="dropzone" id="self-source"></div>
+        </div>
+        <div class="pool" id="source-pool">
+          <div class="draggable" draggable="true" data-answer="self">Sonne</div>
+          <div class="draggable" draggable="true" data-answer="self">Glühlampe</div>
+          <div class="draggable" draggable="true" data-answer="self">Kerzenflamme</div>
+          <div class="draggable" draggable="true" data-answer="self">Glühender Metallstab</div>
+          <div class="draggable" draggable="true" data-answer="passive">Mond</div>
+          <div class="draggable" draggable="true" data-answer="passive">Buchseite</div>
+          <div class="draggable" draggable="true" data-answer="passive">Straßenschild</div>
+          <div class="draggable" draggable="true" data-answer="passive">Dein T-Shirt</div>
+        </div>
+        <div class="column" data-type="passive">
+          <h3>Zwischensender</h3>
+          <div class="dropzone" id="passive-source"></div>
+        </div>
+      </div>
+      <button class="check" data-target="source">Antwort prüfen</button>
+      <p class="feedback" id="feedback-source"></p>
+    </section>
+
+    <section class="level" id="level2">
+      <div class="level-header">
+        <h2>Level 2 – Auge in Aktion</h2>
+        <p>Stelle das Auge ein: Verschiebe die Schieberegler und beobachte, was Pupille und Linse mit dem Licht machen.</p>
+      </div>
+      <div class="eye-sim">
+        <div class="controls">
+          <label>
+            Helligkeit (Pupillenweite)
+            <input type="range" id="light-slider" min="0" max="100" value="60" />
+          </label>
+          <label>
+            Objektentfernung (Akkommodation)
+            <input type="range" id="focus-slider" min="10" max="120" value="70" />
+          </label>
+        </div>
+        <canvas id="eye-canvas" width="420" height="220" aria-label="Augen-Simulation"></canvas>
+        <p class="hint">Tipp: Je heller es ist, desto kleiner wird die Pupille. Je näher das Objekt, desto stärker wölbt sich die Linse.</p>
+      </div>
+    </section>
+
+    <section class="level" id="level3">
+      <div class="level-header">
+        <h2>Level 3 – Schatten und Spiegel</h2>
+        <p>Schalte einzelne Lampen ein oder aus und beobachte Kern- und Halbschatten. Wechsle den Spiegeltyp und sieh, wie sich das Bild verändert.</p>
+      </div>
+      <div class="shadow-sim">
+        <div class="lights">
+          <label><input type="checkbox" id="lightA" checked /> Lampe A</label>
+          <label><input type="checkbox" id="lightB" checked /> Lampe B</label>
+        </div>
+        <canvas id="shadow-canvas" width="480" height="220" aria-label="Schattensimulation"></canvas>
+      </div>
+      <div class="mirror-sim">
+        <label for="mirror-select">Spiegeltyp wählen:</label>
+        <select id="mirror-select">
+          <option value="plane">Ebener Spiegel</option>
+          <option value="concave">Hohlspiegel</option>
+          <option value="convex">Wölbspiegel</option>
+        </select>
+        <canvas id="mirror-canvas" width="420" height="200" aria-label="Spiegelsimulation"></canvas>
+        <p class="hint">Reflexionsgesetz: Einfallswinkel = Ausfallswinkel. Die Krümmung entscheidet, ob das Bild vergrößert oder verkleinert wirkt.</p>
+      </div>
+    </section>
+
+    <section class="level" id="level4">
+      <div class="level-header">
+        <h2>Level 4 – Brechung &amp; Linsen</h2>
+        <p>Verändere den Einfallswinkel und sieh, wie der Strahl gebrochen oder total reflektiert wird. Wechsle die Linse und beobachte die Wirkung auf parallele Strahlen.</p>
+      </div>
+      <div class="refraction-sim">
+        <div class="controls">
+          <label>
+            Einfallswinkel
+            <input type="range" id="angle-slider" min="0" max="80" value="35" />
+          </label>
+        </div>
+        <canvas id="refraction-canvas" width="420" height="200" aria-label="Brechungssimulation"></canvas>
+      </div>
+      <div class="lens-sim">
+        <label for="lens-select">Linsentyp:</label>
+        <select id="lens-select">
+          <option value="convex">Sammellinse (Konvex)</option>
+          <option value="concave">Zerstreuungslinse (Konkav)</option>
+        </select>
+        <canvas id="lens-canvas" width="420" height="200" aria-label="Linsensimulation"></canvas>
+        <p class="hint">Sammellinsen bündeln, Zerstreuungslinsen streuen. Totalreflexion tritt bei flachem Einfallswinkel zur dünneren Seite auf.</p>
+      </div>
+    </section>
+
+    <section class="level" id="level5">
+      <div class="level-header">
+        <h2>Level 5 – Farben &amp; Spektrum</h2>
+        <p>Mische Lichtfarben additiv, mische Körperfarben subtraktiv, und entdecke unsichtbares Licht.</p>
+      </div>
+      <div class="color-mix">
+        <div class="lights">
+          <label><input type="checkbox" class="color-toggle" data-color="red" checked /> Rot</label>
+          <label><input type="checkbox" class="color-toggle" data-color="green" checked /> Grün</label>
+          <label><input type="checkbox" class="color-toggle" data-color="blue" checked /> Blau</label>
+        </div>
+        <div class="color-display" id="additive-display">Additive Mischung</div>
+        <div class="paints">
+          <label><input type="checkbox" class="paint-toggle" data-color="cyan" checked /> Cyan</label>
+          <label><input type="checkbox" class="paint-toggle" data-color="magenta" checked /> Magenta</label>
+          <label><input type="checkbox" class="paint-toggle" data-color="yellow" checked /> Gelb</label>
+        </div>
+        <div class="color-display" id="subtractive-display">Subtraktive Mischung</div>
+        <div class="infrauv">
+          <div class="band ir">Infrarot = Wärme</div>
+          <div class="band visible">Sichtbar</div>
+          <div class="band uv">Ultraviolett = Sonnenbrandgefahr</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Erstellt für neugierige Entdecker:innen – Optik erleben statt nur darüber lesen.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
